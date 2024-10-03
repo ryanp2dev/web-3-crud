@@ -1,11 +1,11 @@
-<?=include_once "listaProdutos.php"?>
+<?php include "visualizar.php"?>
+
 
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br   ">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index.css">
@@ -20,65 +20,49 @@
     <main>
         
         <h2>Cardápio Digital</h2>
+
+
         <section class="container-cafe-manha">
             <div class="container-cafe-manha-titulo">
                 <h3>Opções para o Café</h3>
                 
             </div>
-            <div class="container-cafe-manha-produtos">
+            <div class="container-almoco-produtos">
 
-                <?php foreach($listaProdutos as $produtos):?>
+                <?php foreach($lanches as $produtos):?>
+                 <?php if($produtos['tipo'] =='Hambúrguer' ):?>
                     <div class="container-produto">
                         <div class="container-foto">
                             <img src="<?=$produtos['img']?>">
                         </div>
                         <p><?=$produtos['nome']?></p>
-                        <p>Café cremoso irresistivelmente suave e que envolve seu paladar</p>
-                        <p>R$ 5.00</p>
+                        <p><?=$produtos['descricao']?></p>
+                        <p><?=$produtos['valor']?></p>
+                        <?php endif?>
                     </div>
                 <?php endforeach;?>
+
             </div>
         </section>
+
         <section class="container-almoco">
             <div class="container-almoco-titulo">
                 <h3>Opções de Bebidas</h3>
-                
             </div>
             <div class="container-almoco-produtos">
+                <?php foreach($lanches as $produtos):?>
+                <?php if($produtos['tipo'] == "Bebida"):?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="img/suco_laranja.jpg">
+                        <img src=" <?=$produtos['img']?> ">
                     </div>
-                    <p>Suco de Laranja</p>
-                    <p>Suco natural de laranja 400ml</p>
-                    <p>R$ 5.90</p>
+                    <p><?=$produtos['nome']?></p>
+                    <p><?=$produtos['descricao']?></p>
+                    <p><?=$produtos['valor']?></p>
                 </div>
-                <div class="container-produto">
-                    <div class="container-foto">
-                        <img src="img/suco_abacaxi.jpg">
-                    </div>
-                    <p>Suco Abacaxi com hortelã</p>
-                    <p>suco natural de abacaxi com hortelã 400ml</p>
-                    <p>R$ 5.90</p>
-                </div>
-                <div class="container-produto">
-                    <div class="container-foto">
-                        <img src="img/torre.jpg">
-                    </div>
-                    <p>Torre de Chopp</p>
-                    <p>Torre de cerveja 3,5l</p>
-                    <p>R$ 20.00</p>
-                </div>
-                <div class="container-produto">
-                    <div class="container-foto">
-                        <img src="img/cerveja.jpg">
-                    </div>
-                    <p>Como de Cerveja</p>
-                    <p>Compo de cerveja 400ml</p>
-                    <p>R$ 8.50</p>
-                </div>
+                <?php endif;?>
+               <?php endforeach;?>
             </div>
-
         </section>
     </main>
 </body>
