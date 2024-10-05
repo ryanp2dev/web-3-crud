@@ -1,4 +1,14 @@
-<?php include "visualizar.php"?>
+<?php
+   require "src/conecao.php";
+   require "src/modelo/Produto.php";
+   require "src/Repositorio/ProdutoRepositorio.php";
+
+   $produtosRepositorio = new ProdutoRepositorio($pdo);
+   $dadosLanches = $produtosRepositorio->opcoesLanches();
+   $dadosBebidas = $produtosRepositorio->opcoesBebidas();
+
+   
+?>
 
 
 <!doctype html>
@@ -29,15 +39,15 @@
             </div>
             <div class="container-almoco-produtos">
 
-                <?php foreach($lanches as $produtos):?>
-                 <?php if($produtos['tipo'] =='Hambúrguer' ):?>
+                <?php foreach($dadosLanches as $produto):?>
+                 <?php if($produto->GetTipo() =='Hambúrguer' ):?>
                     <div class="container-produto">
                         <div class="container-foto">
-                            <img src="<?=$produtos['img']?>">
+                            <img src="<?=$produto->getImagem()?>">
                         </div>
-                        <p><?=$produtos['nome']?></p>
-                        <p><?=$produtos['descricao']?></p>
-                        <p><?=$produtos['valor']?></p>
+                        <p><?=$produto->getNome()?></p>
+                        <p><?=$produto->GetDescricao()?></p>
+                        <p><?=$produto->getPreco()?></p>
                         <?php endif?>
                     </div>
                 <?php endforeach;?>
@@ -50,15 +60,15 @@
                 <h3>Opções de Bebidas</h3>
             </div>
             <div class="container-almoco-produtos">
-                <?php foreach($lanches as $produtos):?>
-                <?php if($produtos['tipo'] == "Bebida"):?>
+                <?php foreach($dadosBebidas as $produto):?>
+                <?php if($produto->getTipo() == "Bebida"):?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src=" <?=$produtos['img']?> ">
+                        <img src=" <?=$produto->getImagem()?> ">
                     </div>
-                    <p><?=$produtos['nome']?></p>
-                    <p><?=$produtos['descricao']?></p>
-                    <p><?=$produtos['valor']?></p>
+                    <p><?=$produto->getNome()?></p>
+                    <p><?=$produto->GetDescricao()?></p>
+                    <p><?=$produto->getPreco()?></p>
                 </div>
                 <?php endif;?>
                <?php endforeach;?>
