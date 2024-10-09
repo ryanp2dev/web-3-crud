@@ -17,13 +17,9 @@ public function __construct(PDO $pdo) {
 
 public function opcoesLanches(): array
  {    
-$sql = "select * from produtos";
+$sql = "select * from produtos where tipo = 'Hambúrguer'";
 $statement = $this->pdo->query($sql);
 $Produtoslanches = $statement->fetchAll(PDO::FETCH_ASSOC);   
-
-
-
-
 
    $dadosLanche = array_map(function ($lanches){
      return $this->formarObjeto($lanches);
@@ -68,14 +64,15 @@ $ProdutosBebidas = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 public function salvar(Produto $produto)
 {
-   $sql = "INSERT INTO produtos (img, nome, descricao, valor, tipo)
-   VALUES (?,?,?,?,?)
-   ";
-
-
-
+    $sql = "INSERT INTO produtos (img, nome, descricao, valor, tipo) VALUES (?,?,?,?,?)";
+    $statement = $this->pdo->prepare($sql);
+    $statement->bindValue(1, $produto->getImagem());
+    $statement->bindValue(2, $produto->getNome());
+    $statement->bindValue(3, $produto->getDescricao());
+    $statement->bindValue(4,$produto->getPreco());
+    $statement->bindValue(5, $produto->getTipo());
+    $statement->execute();
 }
-
 
 
 
@@ -84,11 +81,11 @@ public function salvar(Produto $produto)
    private function formarObjeto($dados)
    {
        return new Produto($dados['id'],
-           $dados['img'],
+           $dados['tipo'],
            $dados['nome'],
            $dados['descricao'],
            $dados['valor'],
-           $dados['tipo']);
+           $dados['img']);
    }
 
 

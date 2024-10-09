@@ -6,11 +6,10 @@
  $produtosRepositorio = new ProdutoRepositorio($pdo);
  $todosProdutos = $produtosRepositorio->buscarDados();
 
-
+foreach($todosProdutos as $as) {
+  var_dump($as);
+}
 ?>
-
-
-
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -51,8 +50,8 @@
       <tbody>
         <?php foreach($todosProdutos as $produto):?>
           <tr>
-            <td><?=$produto->GetTipo()?></td>
-            <td><?=$produto->getNome()?></td>
+            <td><?=$produto->GetNome()?></td>
+            <td><?=$produto->getTipo()?></td>
             <td><?=$produto->GetDescricao()?></td>
             <td><?=$produto->GetPreco()?></td>
             <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>

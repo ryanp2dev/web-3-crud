@@ -40,7 +40,7 @@
             <div class="container-almoco-produtos">
 
                 <?php foreach($dadosLanches as $produto):?>
-                 <?php if($produto->GetTipo() =='Hambúrguer' ):?>
+               
                     <div class="container-produto">
                         <div class="container-foto">
                             <img src="<?=$produto->getImagem()?>">
@@ -48,7 +48,7 @@
                         <p><?=$produto->getNome()?></p>
                         <p><?=$produto->GetDescricao()?></p>
                         <p><?=$produto->getPreco()?></p>
-                        <?php endif?>
+                       
                     </div>
                 <?php endforeach;?>
 

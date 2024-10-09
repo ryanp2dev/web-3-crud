@@ -3,17 +3,19 @@ require "src/conecao.php";
 require "src/modelo/Produto.php";
 require "src/Repositorio/ProdutoRepositorio.php";
 
-if(isset($_POST['cadastro'])) {
-    $produto = new Produto(
-        null,
-        $dados['img'],
-        $dados['nome'],
-        $dados['descricao'],
-        $dados['valor'],
-        $dados['tipo']);
+ if (isset($_POST['cadastro'])){
+        $produto = new Produto(null,
+            $_POST['tipo'],
+            $_POST['nome'],
+            $_POST['descricao'],
+            $_POST['preco']
+        );
     
-}
+        $produtoRepositorio = new ProdutoRepositorio($pdo);
+        $produtoRepositorio->salvar($produto);
 
+        header("Location: admin.php");
+    }
 ?>
 
 
@@ -43,18 +45,18 @@ if(isset($_POST['cadastro'])) {
         <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
     <section class="container-form">
-        <form action="#">
+        <form action="#" method="POST">
 
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
             <div class="container-radio">
                 <div>
                     <label for="cafe">Hambúrguer</label>
-                    <input type="radio" id="cafe" name="tipo" value="Café" checked>
+                    <input type="radio" id="cafe" name="tipo" value="Hambúrguer" checked>
                 </div>
                 <div>
                     <label for="almoco">Bebida</label>
-                    <input type="radio" id="almoco" name="tipo" value="Almoço">
+                    <input type="radio" id="almoco" name="tipo" value="Bebida">
                 </div>
             </div>
             <label for="descricao">Descrição</label>
@@ -78,9 +80,3 @@ if(isset($_POST['cadastro'])) {
 </body>
 </html>
 
-
-<?php 
-
-if(!empty($_POST)){
-    var_dump($_POST);
-}
