@@ -43,7 +43,7 @@
                
                     <div class="container-produto">
                         <div class="container-foto">
-                            <img src="<?=$produto->getImagem()?>">
+                            <img src="<?=$produto->getImagemDiretorio()?>">
                         </div>
                         <p><?=$produto->getNome()?></p>
                         <p><?=$produto->GetDescricao()?></p>

@@ -75,7 +75,11 @@ public function salvar(Produto $produto)
 }
 
 
-
+public function deletar() {
+   $sql = "SELECT * FROM jogos WHERE id";
+   $stmt = $conexao->prepare($sql);
+   $stmt->execute();
+}
 
 
    private function formarObjeto($dados)

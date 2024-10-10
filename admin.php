@@ -6,9 +6,7 @@
  $produtosRepositorio = new ProdutoRepositorio($pdo);
  $todosProdutos = $produtosRepositorio->buscarDados();
 
-foreach($todosProdutos as $as) {
-  var_dump($as);
-}
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -31,8 +29,8 @@ foreach($todosProdutos as $as) {
 <main>
   <section class="container-admin-banner">
     <img src="img/logo.png" class="logo-admin" alt="logo-serenatto">
-    <h1>Admistração Serenatto</h1>
-    <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
+    <h1>Admistração </h1>
+   
   </section>
   <h2>Lista de Produtos</h2>
 
@@ -50,6 +48,7 @@ foreach($todosProdutos as $as) {
       <tbody>
         <?php foreach($todosProdutos as $produto):?>
           <tr>
+            
             <td><?=$produto->GetNome()?></td>
             <td><?=$produto->getTipo()?></td>
             <td><?=$produto->GetDescricao()?></td>
@@ -57,7 +56,7 @@ foreach($todosProdutos as $as) {
             <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
             <td>
               <form>
-                <input type="button" class="botao-excluir" value="Excluir">
+                <a class ="botao-excluir"href="editar-produto.html">Excluir</a>
               </form>
             </td> 
           </tr>

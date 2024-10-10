@@ -17,21 +17,11 @@ public function __construct(?int $id, string $tipo,string $nome,string $descrica
     $this->nome = $nome;
     $this->descricao = $descricao;
     $this->preco = $preco;
-
     $this->imagem = $imagem;
 }
 
 
-// public function __construct(?int $id, string $tipo, string $nome, 
-// string $descricao,  float $preco, string $imagem = "logo-serenatto.png")
-// {
-//     $this->id = $id;
-//     $this->tipo = $tipo;
-//     $this->nome = $nome;
-//     $this->descricao = $descricao;
-//     $this->imagem = $imagem;
-//     $this->preco = $preco;
-// }
+
 
 
 
@@ -71,6 +61,11 @@ public function getPrecoFormatado(): float {
 
 
 
+
+public function setImagem(string $imagem): void
+{
+    $this->imagem = $imagem;
+}
 
 
 }
