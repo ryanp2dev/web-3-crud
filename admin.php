@@ -55,8 +55,9 @@
             <td><?=$produto->GetPreco()?></td>
             <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
             <td>
-              <form>
-                <a class ="botao-excluir"href="editar-produto.html">Excluir</a>
+              <form action="excluir-produto.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?=$produto->getId()?>">
+                <button class ="botao-excluir">Excluir</button>
               </form>
             </td> 
           </tr>

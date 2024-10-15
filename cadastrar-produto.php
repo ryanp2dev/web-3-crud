@@ -41,7 +41,7 @@ require "src/Repositorio/ProdutoRepositorio.php";
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Serenatto - Cadastrar Produto</title>
-</head>
+</head> 
 <body>
 <main>
     <section class="container-admin-banner">
@@ -51,7 +51,6 @@ require "src/Repositorio/ProdutoRepositorio.php";
     </section>
     <section class="container-form">
         <form action="#" method="POST" enctype="multipart/form-data">
-
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
             <div class="container-radio">

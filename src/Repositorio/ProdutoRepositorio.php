@@ -47,6 +47,14 @@ public function buscarDados(): array
 
 
 
+public function deletar(int $id)
+{
+    $sql = "DELETE FROM produtos WHERE id = ?";
+    $statement = $this->pdo->prepare($sql);
+    $statement->bindValue(1,$id);
+    $statement->execute();
+
+} 
 
 public function opcoesBebidas(): array 
 {
@@ -75,11 +83,6 @@ public function salvar(Produto $produto)
 }
 
 
-public function deletar() {
-   $sql = "SELECT * FROM jogos WHERE id";
-   $stmt = $conexao->prepare($sql);
-   $stmt->execute();
-}
 
 
    private function formarObjeto($dados)
