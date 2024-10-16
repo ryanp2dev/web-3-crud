@@ -56,6 +56,28 @@ public function deletar(int $id)
 
 } 
 
+
+public function buscar(int $id)
+{
+
+     $sql = "SELECT * FROM produtos WHERE id = ?";
+    
+    // Preparar a declaração
+    $statement = $this->pdo->prepare($sql);
+    
+    // Associar o valor do ID
+    $statement->bindValue(1, $id, PDO::PARAM_INT);
+    
+    // Executar a SQL
+    $statement->execute();
+    
+    // Buscar o resultado
+    $produto = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $produto;
+
+}
+
 public function opcoesBebidas(): array 
 {
     $sql1 = "select * from  produtos where tipo = 'Bebida' ";

@@ -28,7 +28,7 @@
 <body>
 <main>
   <section class="container-admin-banner">
-    <img src="img/logo.png" class="logo-admin" alt="logo-serenatto">
+    <img src="img/logo1.png" class="logo-admin" alt="logo-serenatto">
     <h1>Admistração </h1>
    
   </section>
@@ -53,7 +53,7 @@
             <td><?=$produto->getTipo()?></td>
             <td><?=$produto->GetDescricao()?></td>
             <td><?=$produto->GetPreco()?></td>
-            <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
+            <td><a class="botao-editar" href="editar-produto.php?id=<?=$produto->GetId() ?>">Editar</a></td>
             <td>
               <form action="excluir-produto.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?=$produto->getId()?>">
