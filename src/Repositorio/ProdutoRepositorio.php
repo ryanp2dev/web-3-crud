@@ -57,26 +57,45 @@ public function deletar(int $id)
 } 
 
 
+// public function buscar(int $id)
+// {
+
+//      $sql = "SELECT * FROM produtos WHERE id = ?";
+    
+//     // Preparar a declaração
+//     $statement = $this->pdo->prepare($sql);
+    
+//     // Associar o valor do ID
+//     $statement->bindValue(1, $id, PDO::PARAM_INT);
+    
+//     // Executar a SQL
+//     $statement->execute();
+    
+//     // Buscar o resultado
+//     $produto = $statement->fetchAll(PDO::FETCH_OBJ);
+
+   
+
+//    return $this->formarObjeto($produto);
+
+
+
+// }
+
+
 public function buscar(int $id)
 {
-
-     $sql = "SELECT * FROM produtos WHERE id = ?";
-    
-    // Preparar a declaração
+    $sql = "SELECT * FROM produtos WHERE id = ?";
     $statement = $this->pdo->prepare($sql);
-    
-    // Associar o valor do ID
-    $statement->bindValue(1, $id, PDO::PARAM_INT);
-    
-    // Executar a SQL
+    $statement->bindValue(1, $id);
     $statement->execute();
-    
-    // Buscar o resultado
-    $produto = $statement->fetch(PDO::FETCH_OBJ);
 
-    return $produto;
+    $dados = $statement->fetch(PDO::FETCH_ASSOC);
 
+    return $this->formarObjeto($dados);
 }
+
+
 
 public function opcoesBebidas(): array 
 {
@@ -104,6 +123,19 @@ public function salvar(Produto $produto)
     $statement->execute();
 }
 
+
+public function atualizar(Produto $produto)
+    {
+        $sql = "UPDATE produtos SET img = ?, nome = ?, descricao = ?, valor = ?, tipo = ? WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1, $produto->getImagem());
+        $statement->bindValue(2, $produto->getNome());
+        $statement->bindValue(3, $produto->getDescricao());
+        $statement->bindValue(4,$produto->getPreco());
+        $statement->bindValue(5, $produto->getTipo());
+        $statement->bindValue(6, $produto->getId());
+        $statement->execute();
+    }
 
 
 
