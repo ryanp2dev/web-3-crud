@@ -4,9 +4,40 @@ require "src/modelo/Produto.php";
 require "src/Repositorio/ProdutoRepositorio.php";
 
 
-$produtosRepositorio = new ProdutoRepositorio($pdo);
-$produto = $produtosRepositorio->buscar($_GET['id']);
-var_dump($produto);
+$produtoRepositorio = new ProdutoRepositorio($pdo);
+// $produto = $produtosRepositorio->buscar($_GET['id']);
+// var_dump($produto->GetNome());
+
+
+if (isset($_POST['editar'])){
+  $produto = new Produto($_POST['id'], $_POST['tipo'], $_POST['nome'], $_POST['descricao'], $_POST['valor']);
+  /**
+   * Variável global para transferência de arquivos
+   */
+  //var_dump($_FILES);
+  if (isset($_FILES['imagem'])){
+
+      /**
+       * uniqid() cria um id único. Para assegurar que não haverá duplicidade
+       */
+      $produto->setImagem(uniqid() . $_FILES['imagem']['name']);
+      /**
+       * Move o arquivo do diretório temporário para o local desejado
+       * $_FILES['imagem']['tmp_name']: Diretório temporário
+       */
+      move_uploaded_file($_FILES['imagem']['tmp_name'], $produto->getImagemDiretorio());
+
+  }
+  
+  $produtoRepositorio->atualizar($produto);
+  header("Location: admin.php");
+
+}
+else{ 
+  $produto = $produtoRepositorio->buscar($_GET['id']);
+}
+
+
 
 ?>
 <!doctype html>
@@ -30,36 +61,36 @@ var_dump($produto);
 <body>
 <main>
   <section class="container-admin-banner">
-    <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
+    <img src="img/logo.png" class="logo-admin" alt="logo-serenatto">
     <h1>Editar Produto</h1>
-    <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
+   
   </section>
   <section class="container-form">
-    <form action="#">
+  <form method="post" enctype="multipart/form-data">
 
       <label for="nome">Nome</label>
-      <input type="text" id="nome" name="nome" value="<?=$produtoAlterar->GetNome()?>" required>
+      <input type="text" id="nome" name="nome" value="<?=$produto->GetNome()?>" required>
 
       <div class="container-radio">
         <div>
             <label for="cafe">Café</label>
-            <input type="radio" id="cafe" name="tipo" value="Café" checked>
+            <input type="radio" id="cafe" name="tipo" value="Café" <?= $produto->getTipo() == "Hambúrguer"? "checked" : "" ?>>
         </div>
         <div>
             <label for="almoco">Almoço</label>
-            <input type="radio" id="almoco" name="tipo" value="Almoço">
+            <input type="radio" id="almoco" name="tipo" value="Almoço" <?= $produto->getTipo() == "Bebida"? "checked" : "" ?>>
         </div>
     </div>
 
       <label for="descricao">Descrição</label>
-      <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
+      <input type="text" id="descricao" name="descricao" value="<?=$produto->GetDescricao()?>" required>
 
       <label for="preco">Preço</label>
-      <input type="text" id="preco" name="preco" placeholder="Digite uma descrição" required>
+      <input type="text" id="preco" name="valor" value="<?=$produto->Getpreco()?>" required>
 
       <label for="imagem">Envie uma imagem do produto</label>
       <input type="file" name="imagem" accept="image/*" id="imagem" placeholder="Envie uma imagem">
-
+      <input type="hidden" name="id" value="<?= $produto->getId()?>">
       <input type="submit" name="editar" class="botao-cadastrar"  value="Editar produto"/>
     </form>
 

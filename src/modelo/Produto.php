@@ -55,10 +55,14 @@ public function getImagemDiretorio(): string {
      
 }
 
-public function getPrecoFormatado(): float {
-    return  "R$ ".number_format($this->preco,2);
-}
+// public function getPrecoFormatado(): float {
+//     return  "R$ ".number_format($this->preco,2);
+// }
 
+public function getPrecoFormatado():string
+    {
+        return "R$ " . number_format($this->preco, 2);
+    }
 
 
 
